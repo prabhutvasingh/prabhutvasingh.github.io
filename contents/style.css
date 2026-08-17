@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fdf8e8;
+    color: #222;
+}
+
+.page {
+    padding-top: 60px;
+    text-align: center;
+}
+
+.title {
+    color: #000;
+    font-size: 96px;
+}
+
+.subtitle {
+    color: #333;
+    font-size: 24px;
+    margin-top: 12px;
+}
+
+/* Game title card */
+.games-label {
+    text-align: center;
+    color: #000;
+    font-size: 32px;
+    margin-top: 40px;
+}
+
+.card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    max-width: 520px;
+    margin: 60px auto 40px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 16px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: left;
+}
+
+.card-logo {
+    width: 96px;
+    height: 96px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.card-title {
+    color: #000;
+    font-size: 28px;
+    margin-bottom: 8px;
+    text-align: right;
+}
+
+.card-desc {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Bottom center italic notice */
+.coming-soon {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    font-size: 18px;
+    margin-top: 40px;
+}
+.marquee-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #1e6fff;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1000;
+    height: 40px;
+    line-height: 40px;
+}
+
+.marquee-track {
+    display: inline-block;
+    will-change: transform;
+}
+
+.marquee-track span {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
