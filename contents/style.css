@@ -56,6 +56,16 @@ body {
     flex-shrink: 0;
 }
 
+.logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #d9c39a;
+    color: #4a3000;
+    font-size: 28px;
+    font-weight: bold;
+}
+
 .card-title {
     color: #000;
     font-size: 28px;
