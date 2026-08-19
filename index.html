@@ -1,37 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LowTier - Game</title>
-    <link rel="stylesheet" href="contents/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LowTier</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, ui-sans-serif, sans-serif;
+  background: #fafaff;
+  color: #1a1a2e;
+  line-height: 1.5;
+}
+a { color: inherit; text-decoration: none; }
+
+.topbar {
+  background: #1a1a2e;
+  color: #a0c4ff;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+}
+.topbar-inner {
+  display: inline-block;
+  white-space: nowrap;
+}
+.topbar-inner span { display: inline-block; padding-right: 10px; }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-bottom: 2px solid #e0e0f0;
+}
+nav .logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+nav .logo span { color: #5b6abf; }
+nav .links { display: flex; align-items: center; gap: 24px; font-size: 14px; font-weight: 600; }
+nav .links a { color: #555; line-height: 1; }
+nav .links a:hover { color: #5b6abf; }
+nav .contact-link {
+  background: #5b6abf;
+  color: #fff;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+nav .contact-link:hover { background: #4752a0; }
+
+.hero {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 64px 32px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.hero-left { flex: 1; }
+.hero-left .badge {
+  display: inline-block;
+  background: #e8e8ff;
+  color: #5b6abf;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+.hero-left h1 {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.hero-left h1 .highlight { color: #5b6abf; }
+.hero-left p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+.hero-left .cta-row { display: flex; gap: 12px; }
+.hero-left .btn-primary {
+  background: #5b6abf;
+  color: #fff;
+  padding: 14px 32px;
+  font-weight: 700;
+  font-size: 15px;
+}
+.hero-left .btn-primary:hover { background: #4752a0; }
+.hero-left .btn-secondary {
+  border: 2px solid #ddd;
+  color: #444;
+  padding: 14px 32px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.hero-left .btn-secondary:hover { border-color: #aaa; }
+.hero-right {
+  flex: 1;
+  background: #e8e8ff;
+  padding: 48px 32px;
+  text-align: center;
+  border: 2px solid #d0d0f0;
+}
+.hero-right .product-name {
+  font-size: 32px;
+  font-weight: 900;
+  color: #1a1a2e;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.hero-right .product-name span { color: #5b6abf; }
+.hero-right .tagline {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+section { padding: 64px 32px; }
+.section-wrap { max-width: 1000px; margin: 0 auto; }
+.section-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.section-title span { color: #5b6abf; }
+.section-sub {
+  color: #888;
+  font-size: 15px;
+  margin-bottom: 36px;
+  max-width: 500px;
+}
+
+#games { background: #fafaff; }
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.game-card {
+  border: 2px solid #d0d0f0;
+  padding: 28px 24px;
+  background: #fff;
+}
+.game-card .icon { font-size: 36px; margin-bottom: 12px; }
+.game-card img.game-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+.game-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.game-card p { font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 12px; }
+.game-card .tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  background: #e8e8ff;
+  color: #5b6abf;
+  padding: 3px 10px;
+}
+
+#about { background: #f4f4ff; }
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.about-card {
+  border: 2px solid #d0d0f0;
+  padding: 20px 24px;
+  background: #fff;
+}
+.about-card .icon { font-size: 28px; margin-bottom: 6px; }
+.about-card h3 { font-size: 16px; font-weight: 700; }
+.about-card p { font-size: 14px; color: #666; margin-top: 4px; }
+
+#contact {
+  background: #1a1a2e;
+  color: #fff;
+  text-align: center;
+}
+#contact .section-title span { color: #a0c4ff; }
+#contact .section-sub { color: #aaa; margin: 0 auto 32px; }
+.btn-contact {
+  display: inline-block;
+  background: #5b6abf;
+  color: #fff;
+  padding: 16px 48px;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: 8px;
+}
+.btn-contact:hover { background: #4752a0; }
+#contact .fine {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #666;
+}
+
+footer {
+  text-align: center;
+  padding: 24px 32px;
+  font-size: 13px;
+  color: #aaa;
+  border-top: 2px solid #eee;
+}
+
+@media (max-width: 700px) {
+  .hero { flex-direction: column; padding: 40px 20px; gap: 32px; }
+  .hero-left h1 { font-size: 32px; }
+  .game-grid, .about-grid { grid-template-columns: 1fr; }
+  nav { padding: 12px 20px; }
+  nav .links { gap: 12px; font-size: 12px; }
+  section { padding: 40px 20px; }
+}
+</style>
 </head>
 <body>
-    <div class="marquee-bar"></div>
-    <main class="page">
-        <h1 class="title">LowTier</h1>
-        <p class="subtitle">Making 2D Games that are lightweight, and offline.</p>
 
-        <h2 class="games-label">Games published</h2>
+<div class="topbar"><div class="topbar-inner" id="ticker"></div></div>
 
-        <div class="card">
-            <img src="contents/matrixjumper.png" alt="Matrix Jumper logo" class="card-logo">
-            <div class="card-body">
-                <h2 class="card-title">Matrix Jumper</h2>
-                <p class="card-desc">A lightweight, offline 2D platformer where you jump through endless levels. Play anytime, anywhere.</p>
-            </div>
-        </div>
+<script>
+(function() {
+  const el = document.getElementById('ticker');
+  const msg = ' LowTier Games ';
+  let i = 0;
+  function step() {
+    const span = document.createElement('span');
+    span.textContent = msg;
+    el.appendChild(span);
+    i++;
+    if (el.scrollWidth > window.innerWidth * 2) return;
+    requestAnimationFrame(step);
+  }
+  step();
 
-        <div class="card">
-            <div class="card-logo logo-placeholder">SGL</div>
-            <div class="card-body">
-                <h2 class="card-title">Six Gun Legacy</h2>
-                <p class="card-desc">Defend, and shoot! A wild-west arcade shooter. Face 9 phases of enemies and a final boss. Can you beat them all?</p>
-            </div>
-        </div>
+  let pos = 0;
+  const speed = 1.2;
+  function scroll() {
+    pos -= speed;
+    const w = el.scrollWidth / 2;
+    if (pos <= -w) pos += w;
+    el.style.transform = 'translateX(' + pos + 'px)';
+    requestAnimationFrame(scroll);
+  }
+  scroll();
+})();
+</script>
 
-        <p class="coming-soon">Coming soon...</p>
-    </main>
-    <script src="contents/script.js"></script>
+<nav>
+  <div class="logo">LOW<span>TIER</span></div>
+  <div class="links">
+    <a href="#games">Games</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="contact-link">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="badge">EST. 2026</div>
+    <h1>
+      <span class="highlight">LowTier</span><br>
+      Game Studio
+    </h1>
+    <p>
+      Making 2D games that are lightweight and offline.
+    </p>
+    <div class="cta-row">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#games" class="btn-secondary">Our Games</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="product-name">
+      LOW<span>TIER</span>
+    </div>
+    <div class="tagline">
+      Lightweight &amp; Offline<br>
+      2D Games
+    </div>
+  </div>
+</div>
+
+<section id="games">
+  <div class="section-wrap">
+    <h2 class="section-title">Our <span>Projects</span></h2>
+    <p class="section-sub">Games we are actively developing.</p>
+    <div class="game-grid">
+      <div class="game-card">
+        <img src="lowtier-assets/sixgunlegacy.png" alt="Six Gun Legacy logo" class="game-img">
+        <h3>Six Gun Legacy</h3>
+        <p>Defend, and shoot! A wild-west arcade shooter. Face 9 phases of enemies and a final boss. Can you beat them all?</p>
+        <span class="tag">RELEASED</span>
+      </div>
+      <div class="game-card">
+        <img src="lowtier-assets/matrixjumper.png" alt="Matrix Jumper logo" class="game-img">
+        <h3>Matrix Jumper</h3>
+        <p>A lightweight, offline 2D platformer where you jump through endless levels. Play anytime, anywhere.</p>
+        <span class="tag">RELEASED</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-wrap">
+    <h2 class="section-title">About <span>Us</span></h2>
+    <p class="section-sub">A small studio focused on game development.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="icon">👥</div>
+        <h3>Small Team</h3>
+        <p>Two developers working together on every aspect of game creation.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">⚡</div>
+        <h3>Iterative Process</h3>
+        <p>We prototype quickly and refine based on what works best.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">🎮</div>
+        <h3>Player Experience</h3>
+        <p>We prioritize gameplay quality and fair design in every project.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">📱</div>
+        <h3>Mobile Focus</h3>
+        <p>Our games are built with mobile platforms in mind from the start.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-wrap">
+    <h2 class="section-title">Get in <span>Touch</span></h2>
+    <p class="section-sub">Have a question or want to collaborate?</p>
+    <a href="mailto:lowtierstudiosofficial@gmail.com" class="btn-contact">lowtierstudiosofficial@gmail.com</a>
+    <p class="fine">We will get back to you as soon as possible.</p>
+  </div>
+</section>
+
+<footer>
+  LowTier Game Studio &copy; 2026
+</footer>
+
 </body>
 </html>
